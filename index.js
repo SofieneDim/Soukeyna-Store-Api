@@ -24,7 +24,7 @@ app.get('/', async function (req, res) {
     delete limit;
     delete page;
 
-    const products = await Product.find(req.query).skip(+skip | 0).limit(+limit | 0);
+    const products = await Product.find(req.query).sort({ createdAt: -1 }).skip(+skip | 0).limit(+limit | 0);
 
     return res.status(200).json({ message: 'success', products });
 })
