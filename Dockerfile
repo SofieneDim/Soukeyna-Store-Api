@@ -1,5 +1,8 @@
 FROM node:14.15.0
 
+LABEL build="docker build -t sk-api ."
+LABEL run="docker rm -f sk-api && docker run -d --restart always -p 8001:8001 --name sk-api sk-api"
+
 WORKDIR /app
 
 COPY package*.json /app/

@@ -3,8 +3,13 @@ const Reference = require('./models/reference');
 
 module.exports.generateReference = async function () {
 
-    const reference = await Reference.findOne({ name: 'last' });
-    const lastReference = reference ? reference.value + 1 : 101;
+    let reference = await Reference.findOne({ name: 'last' });
+
+    if (!reference) {
+        reference = new Reference({ name: 'last', value: 101 });
+        await reference.save();
+    }
+    const lastReference = reference.value + 1;
 
     return lastReference;
 }

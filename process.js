@@ -28,9 +28,9 @@ module.exports.processImage = async function (imagePath) {
 
     // save
     await soukeynaStoreImage.writeAsync(`./results/soukeyna store/${reference}.jpeg`);
-    // await skCollectionImage.writeAsync(`./results/sk collection/${reference}.jpeg`);
-    // await msShopImage.writeAsync(`./results/ms shop/${reference}.jpeg`);
-    // await dimesTnImage.writeAsync(`./results/dimes tn/${reference}.jpeg`);
+    await skCollectionImage.writeAsync(`./results/sk collection/${reference}.jpeg`);
+    await msShopImage.writeAsync(`./results/ms shop/${reference}.jpeg`);
+    await dimesTnImage.writeAsync(`./results/dimes tn/${reference}.jpeg`);
 
     return { path: path.resolve(`./results/soukeyna store/${reference}.jpeg`), reference };
 }
