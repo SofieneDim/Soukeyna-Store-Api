@@ -38,8 +38,6 @@ module.exports.processImage = async function (imagePath) {
     // delete
     fs.rm(soukeynaLocalPath, {}, () => console.log(`${reference}.jpeg was deleted`));
 
-
-
     const path = await createAndUploadFile(soukeynaLocalPath, reference);
 
     return { path, reference };
