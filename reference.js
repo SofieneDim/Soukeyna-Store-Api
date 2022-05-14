@@ -4,7 +4,7 @@ const Reference = require('./models/reference');
 module.exports.generateReference = async function () {
 
     const reference = await Reference.findOne({ name: 'last' });
-    const lastReference = reference.value + 1;
+    const lastReference = reference ? reference.value + 1 : 101;
 
     return lastReference;
 }
