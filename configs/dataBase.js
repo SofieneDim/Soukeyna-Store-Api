@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const { debug } = require('console');
 const util = require('util');
 
-const mongoUri = "mongodb://intigoadmin_dev:intigo2020@173.249.46.194:27011/store_db?authSource=intigo_db_dev";
+const mongoUri = "mongodb://intigoadmin_dev:intigo2020@173.249.46.194:27011/intigo_db_dev";
 // plugin bluebird promise in mongoose
 mongoose.Promise = Promise;
 
