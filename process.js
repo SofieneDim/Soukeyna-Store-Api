@@ -1,8 +1,9 @@
 const Jimp = require('jimp');
-const path = require("path");
+const fs = require("fs");
 
 const { generateReference, pasteReference } = require('./reference');
 const { pasteLogo } = require('./logo');
+const { createAndUploadFile } = require('./googleDrive');
 
 const imageWidth = 640;
 
@@ -22,15 +23,24 @@ module.exports.processImage = async function (imagePath) {
 
     // logo
     soukeynaStoreImage = await pasteLogo(image.clone(), soukeynaStore, imageWidth);
-    skCollectionImage = await pasteLogo(image.clone(), skCollection, imageWidth);
-    msShopImage = await pasteLogo(image.clone(), msShop, imageWidth);
-    dimesTnImage = await pasteLogo(image.clone(), dimesTn, imageWidth);
+    // skCollectionImage = await pasteLogo(image.clone(), skCollection, imageWidth);
+    // msShopImage = await pasteLogo(image.clone(), msShop, imageWidth);
+    // dimesTnImage = await pasteLogo(image.clone(), dimesTn, imageWidth);
+
+    const soukeynaLocalPath = `./results/soukeyna store/${reference}.jpeg`;
 
     // save
-    await soukeynaStoreImage.writeAsync(`./results/soukeyna store/${reference}.jpeg`);
-    await skCollectionImage.writeAsync(`./results/sk collection/${reference}.jpeg`);
-    await msShopImage.writeAsync(`./results/ms shop/${reference}.jpeg`);
-    await dimesTnImage.writeAsync(`./results/dimes tn/${reference}.jpeg`);
+    await soukeynaStoreImage.writeAsync(soukeynaLocalPath);
+    // await skCollectionImage.writeAsync(`./results/sk collection/${reference}.jpeg`);
+    // await msShopImage.writeAsync(`./results/ms shop/${reference}.jpeg`);
+    // await dimesTnImage.writeAsync(`./results/dimes tn/${reference}.jpeg`);
 
-    return { path: path.resolve(`./results/soukeyna store/${reference}.jpeg`), reference };
+    // delete
+    fs.rm(soukeynaLocalPath, {}, () => console.log(`${reference}.jpeg was deleted`));
+
+
+
+    const path = await createAndUploadFile(soukeynaLocalPath, reference);
+
+    return { path, reference };
 }
