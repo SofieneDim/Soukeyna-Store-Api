@@ -15,7 +15,7 @@ node {
 		sshCommand remote: remote, command: "cd /root/test/backend && git reset --hard"
 		sshCommand remote: remote, command: "cd /root/test/backend && git pull origin main"
 		sshCommand remote: remote, command: "cd /root/test/backend && rm -rf node_modules package-lock.json"
-		sshCommand remote: remote, command: "cd /root/test/backend && docker build -t sk-api -f ./docker/Dockerfile.prod ."
+		sshCommand remote: remote, command: "cd /root/test/backend && docker build -t sk-api ."
 	}
 
     stage('Deploy'){

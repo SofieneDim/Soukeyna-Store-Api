@@ -15,6 +15,6 @@ RUN npm install --force
 
 COPY . /app/
 
-EXPOSE 8100
+EXPOSE 8001
 
 CMD ["npm", "start"]
