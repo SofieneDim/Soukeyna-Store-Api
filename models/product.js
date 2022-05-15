@@ -9,7 +9,7 @@ const ProductSchema = new Schema({
         type: String,
     },
     ref: {
-        type: Number,
+        type: String,
         unique: true,
         required: true,
     },

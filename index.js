@@ -18,19 +18,23 @@ app.use(bodyParser.json());
 
 
 
-app.get('/', async function (req, res) {
-    const { limit, page } = req.query;
+app.get('/products', async function (req, res) {
+    const { limit, page, ref } = req.query;
     const skip = limit * (page - 1);
-    delete limit;
-    delete page;
+    const queries = ref ? { ref: { $regex: new RegExp(ref, "g") } } : {};
 
-    const products = await Product.find(req.query).sort({ createdAt: -1 }).skip(+skip | 0).limit(+limit | 0);
+    var re = new RegExp(ref, "g");
+
+    console.log('queries:', queries)
+
+    const products = await Product.find(queries)
+        .sort({ createdAt: -1 }).skip(+skip | 0).limit(+limit | 0);
 
     return res.status(200).json({ message: 'success', products });
 })
 
 
-app.post('/', upload.single('image'), async function (req, res) {
+app.post('/products', upload.single('image'), async function (req, res) {
     const originalImage = req.file;
 
     try {
